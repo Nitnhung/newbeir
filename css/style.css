@@ -1,0 +1,813 @@
+/* ------------------- */
+/* Custom Properties   */
+/* ------------------- */
+:root {
+    /* V1.2: New Palette for Header & Navbar */
+    --v12-header-bg: #1E3A5F; /* Xanh Navy Đậm */
+    --v12-header-text: #E0E7FF; /* Xanh Lavender Rất Nhạt (cho chữ phụ) */
+    --v12-header-highlight: #FFFFFF; /* Trắng (cho chữ chính, logo) */
+
+    --v12-navbar-bg: #3B5998; /* Xanh Facebook Blue / Xanh Đậm Vừa */
+    --v12-navbar-link: #D6DFFF; /* Xanh Nhạt / Tím Nhạt cho link */
+    --v12-navbar-link-hover: #FFFFFF; /* Trắng cho link hover/active */
+    --v12-navbar-search-bg: #2E4A85; /* Nền search đậm hơn navbar một chút */
+
+    /* Original colors from seed (V1.0) - will be used for content below navbar */
+    --primary-color: #0056b3;
+    --primary-color-dark: #004085;
+    --secondary-color: #f0f8ff;
+    --text-color: #333;
+    --light-text-color: #fff; /* Vẫn hữu ích cho các button trong content */
+    --border-color: #ddd;
+    /* --header-bg: #ffffff; -- Will be overridden by V1.2 palette */
+    --footer-bg: #2c3e50; /* Giữ nguyên màu footer gốc */
+    --font-sans: 'Arial', sans-serif;
+}
+
+/* ------------------- */
+/* Reset               */
+/* ------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    color: var(--text-color); /* Màu chữ mặc định cho content */
+    background-color: #f4f7f6; /* Màu nền tổng thể nhẹ nhàng cho content */
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color); /* Màu link mặc định cho content */
+}
+
+a:hover {
+    color: var(--primary-color-dark); /* Màu link hover cho content */
+}
+
+/* ------------------- */
+/* Utility Classes     */
+/* ------------------- */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Buttons in content area retain original styling from seed V1.0 */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-color-dark);
+    border-color: var(--primary-color-dark);
+    color: var(--light-text-color);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+}
+
+.btn-small {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    align-self: flex-start;
+}
+
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ------------------- */
+/* Header (V1.2 Styling) */
+/* ------------------- */
+.site-header {
+    background-color: var(--v12-header-bg); /* V1.2: New header background */
+    padding: 15px 0;
+    border-bottom: 1px solid var(--v12-navbar-bg); /* V1.2: Border to complement navbar */
+    position: relative;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.club-identity {
+    display: flex;
+    align-items: center;
+}
+
+.club-logo {
+    width: 60px;
+    height: auto;
+    margin-right: 15px;
+    /* V1.2: Style logo for dark background */
+    background-color: var(--v12-header-highlight); /* White bg for logo image if it has transparency */
+    padding: 5px;
+    border-radius: 8px; /* Slightly more rounded */
+    border: 1px solid var(--v12-navbar-bg); /* Border matching navbar color */
+}
+
+.club-name h1 {
+    font-size: 1.5em;
+    color: var(--v12-header-highlight); /* V1.2: Club name color */
+    margin-bottom: 0;
+}
+
+.club-name p {
+    font-size: 0.9em;
+    color: var(--v12-header-text); /* V1.2: Club slogan color */
+}
+
+.partner-logos {
+    display: flex;
+    align-items: center;
+}
+
+.partner-logo {
+    width: 40px;
+    height: auto;
+    margin-left: 10px;
+    /* V1.2: Style partner logos for dark background */
+    background-color: rgba(255,255,255,0.8); /* Semi-transparent white bg */
+    padding: 3px;
+    border-radius: 6px;
+    border: 1px solid var(--v12-navbar-bg);
+}
+
+/* ------------------- */
+/* Navigation Bar (V1.2 Styling) */
+/* ------------------- */
+.navbar {
+    background-color: var(--v12-navbar-bg); /* V1.2: New navbar background */
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Stronger shadow for dark navbar */
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    color: var(--v12-navbar-link); /* V1.2: New link color */
+    font-weight: bold;
+    padding: 8px 0;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-links a:hover,
+.nav-links a.active-nav-link,
+.nav-links a.active {
+    color: var(--v12-navbar-link-hover); /* V1.2: New hover/active color */
+    border-bottom: 2px solid var(--v12-navbar-link-hover);
+}
+
+.nav-links .login-btn {
+    background-color: var(--v12-header-highlight); /* V1.2: Login button bg (White) */
+    color: var(--v12-navbar-bg); /* V1.2: Login button text (Navbar bg color) */
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+.nav-links .login-btn:hover {
+    background-color: var(--v12-navbar-link); /* V1.2: Lighter bg on hover */
+    color: var(--v12-navbar-search-bg); /* Darker text on hover */
+    border-bottom: none;
+    transform: translateY(-1px);
+}
+
+.search-item {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.search-item input[type="search"] {
+    padding: 8px 12px;
+    border: 1px solid var(--v12-navbar-search-bg); /* V1.2: Border for search input */
+    border-radius: 5px 0 0 5px;
+    border-right: none;
+    background-color: rgba(255,255,255,0.1); /* V1.2: Slightly transparent bg */
+    color: var(--v12-navbar-link-hover); /* V1.2: Text color */
+}
+.search-item input[type="search"]::placeholder {
+    color: var(--v12-navbar-link); /* V1.2: Placeholder color */
+}
+
+.search-item .search-btn {
+    padding: 8px 12px;
+    background-color: var(--v12-navbar-search-bg); /* V1.2: Search button bg */
+    color: var(--v12-navbar-link-hover); /* V1.2: Search button text color */
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.search-item .search-btn:hover {
+    background-color: color-mix(in srgb, var(--v12-navbar-search-bg) 80%, black); /* Darker on hover */
+}
+
+.mobile-nav-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0.5em;
+}
+/* V1.2: Update mobile nav toggle icon color for new header background */
+.mobile-nav-toggle {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(224, 231, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); /* Using --v12-header-text color */
+}
+.mobile-nav-toggle[aria-expanded="true"] {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(224, 231, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M6 6l18 18M6 24L24 6'/%3e%3c/svg%3e"); /* Using --v12-header-text color */
+}
+
+
+/* ------------------- */
+/* Hero Section (Retains original styling from seed V1.0) */
+/* ------------------- */
+.hero-section {
+    background: url('../images/hero-background.jpg') no-repeat center center/cover;
+    color: var(--light-text-color); /* Original light text, still suitable for dark overlay */
+    text-align: center;
+    padding: 100px 20px;
+    position: relative;
+}
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+.hero-section h2 {
+    font-size: 2.8em;
+    margin-bottom: 20px;
+}
+.hero-section p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+/* ------------------- */
+/* Main Content Area (General - Retains original styling from seed V1.0) */
+/* All styles below this point are from the original seed V1.0 and affect content *BELOW* the navbar */
+/* ------------------- */
+.main-area {
+    padding: 40px 0;
+}
+
+.page-title-section {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 10px;
+    background-color: var(--secondary-color); /* Original content bg color */
+    border-left: 5px solid var(--primary-color); /* Original content accent color */
+}
+
+.page-title-section h3 {
+    font-size: 1.8em;
+    color: var(--primary-color); /* Original content text color */
+}
+
+/* For V1.0 index.html layout (if applicable to code (3).html, these are original) */
+.content-layout {
+    display: flex;
+    gap: 30px;
+}
+
+.main-content {
+    flex: 2;
+    background-color: #fff; /* Original content card bg */
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.main-content h4 {
+    font-size: 1.4em;
+    color: var(--primary-color); /* Original */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+}
+.main-content h4:first-child {
+    margin-top: 0;
+}
+.main-content p, .main-content ul {
+    margin-bottom: 15px;
+}
+.main-content ul {
+    padding-left: 20px;
+    list-style: disc;
+}
+.main-content article {
+    margin-bottom: 20px;
+}
+.main-content article h5 {
+    font-size: 1.2em;
+    color: var(--primary-color-dark); /* Original */
+    margin-bottom: 5px;
+}
+
+.gallery {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.gallery img {
+    width: calc(33.333% - 7px);
+    height: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+}
+
+.sidebar-image { /* For V1.0 index.html sidebar */
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.sidebar-image h4 {
+    font-size: 1.2em;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+.sidebar-image h5 {
+    font-size: 1.1em;
+    color: var(--primary-color);
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.sidebar-image img {
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+}
+.sidebar-image ul {
+    padding-left: 0;
+    list-style: none;
+}
+.sidebar-image ul li a {
+    display: block;
+    padding: 5px 0;
+    color: var(--text-color);
+}
+.sidebar-image ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* Styles for code (3).html (gioi-thieu-clb.html specific content) - These remain original from seed V1.0 */
+.introduction-search-bar {
+    display: flex;
+    gap: 10px;
+    margin: 25px 0;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.introduction-search-bar input[type="search"] {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1em;
+}
+.introduction-search-bar .btn-primary { /* This button is inside content, uses original btn-primary */
+    padding: 12px 20px;
+}
+
+.introduction-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.section-subtitle {
+    font-size: 1.5em;
+    color: var(--primary-color-dark); /* Original */
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--primary-color); /* Original */
+    display: inline-block;
+}
+
+.introduction-featured-events {
+    flex: 2.5;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.intro-event-card {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.intro-event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.intro-event-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.intro-card-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.intro-card-content h5 {
+    font-size: 1.2em;
+    color: var(--primary-color); /* Original */
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.intro-card-content p {
+    font-size: 0.9em;
+    color: #555; /* Original */
+    line-height: 1.5;
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.introduction-sidebar {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.sidebar-main-banner-intro {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.sidebar-main-banner-intro img {
+    width: 100%;
+    height: auto;
+    max-height: 280px;
+    object-fit: cover;
+    display: block;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+.banner-overlay-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 64, 133, 0.85), rgba(0, 86, 179, 0.0)); /* Original gradient */
+    color: var(--light-text-color);
+    padding: 20px 15px 15px 15px;
+    text-align: left;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.sidebar-categories-intro {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+.intro-category-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    aspect-ratio: 1/1;
+    display: block;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.intro-category-card:hover {
+    transform: scale(1.04);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+.intro-category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.intro-category-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 64, 133, 0.85); /* Original */
+    color: var(--light-text-color);
+    padding: 8px 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+/* ------------------- */
+/* Contact Form (Retains original styling from seed V1.0) */
+/* ------------------- */
+.contact-form-section {
+    background-color: var(--secondary-color); /* Original */
+    padding: 50px 0;
+    text-align: center;
+}
+
+.contact-form-section h3 {
+    font-size: 2em;
+    color: var(--primary-color); /* Original */
+    margin-bottom: 30px;
+}
+
+#contactForm {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff; /* Original */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-color); /* Original */
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color); /* Original */
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#contactForm button[type="submit"] { /* This button is in content, uses original btn-primary */
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+}
+
+/* ------------------- */
+/* Footer (Retains original styling from seed V1.0) */
+/* ------------------- */
+.site-footer-bottom {
+    background-color: var(--footer-bg); /* Original */
+    color: var(--light-text-color);
+    text-align: center;
+    padding: 30px 0;
+    font-size: 0.9em;
+}
+
+.site-footer-bottom p {
+    margin-bottom: 5px;
+}
+
+/* ------------------- */
+/* Responsive Design ( Largely original from seed V1.0, with minor V1.2 adjustments for mobile nav)  */
+/* ------------------- */
+
+@media (max-width: 992px) {
+    .content-layout {
+        flex-direction: column;
+    }
+    .main-content, .sidebar-image {
+        flex: none;
+        width: 100%;
+    }
+    .gallery img {
+        width: calc(50% - 5px);
+    }
+}
+
+@media (min-width: 769px) {
+    .introduction-layout {
+        flex-direction: row;
+    }
+    .intro-event-card {
+        flex-direction: row;
+    }
+    .intro-event-card img {
+        width: 40%;
+        height: auto;
+        min-height: 180px;
+    }
+    .intro-card-content {
+        width: 60%;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-wrap: wrap;
+    }
+    .club-identity {
+        flex-grow: 1;
+    }
+    .partner-logos {
+         margin-top: 10px;
+         width: 100%;
+         justify-content: center;
+    }
+
+    .mobile-nav-toggle { /* SVG color already updated for V1.2 */
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-50%);
+        z-index: 9999;
+        width: 2rem;
+        aspect-ratio: 1;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .nav-links {
+        position: fixed;
+        inset: 0 0 0 30%;
+        flex-direction: column;
+        padding: min(20vh, 10rem) 2em;
+        gap: 1em;
+        /* V1.2: Adjust mobile nav panel for new theme */
+        background: color-mix(in srgb, var(--v12-navbar-bg) 95%, white); /* Slightly lighter than navbar bg */
+        backdrop-filter: blur(1rem);
+        transform: translateX(100%);
+        transition: transform 350ms ease-out;
+        z-index: 9998;
+    }
+
+    .nav-links[data-visible="true"] {
+        transform: translateX(0%);
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+    }
+    /* V1.2: Links in open mobile nav */
+    .nav-links a {
+        color: var(--v12-navbar-link-hover); /* White links for better contrast on mobile panel */
+    }
+    .nav-links a:hover,
+    .nav-links a.active-nav-link,
+    .nav-links a.active {
+        color: var(--v12-header-text); /* Lighter highlight */
+        border-bottom: 2px solid var(--v12-header-text);
+    }
+
+    .search-item {
+        margin-left: 0;
+        width: 100%;
+        flex-direction: column;
+        gap: 5px; /* Add gap for mobile */
+    }
+    .search-item input[type="search"] {
+        width: 100%;
+        border-radius: 5px; /* Full radius on mobile */
+        margin-bottom: 0;
+        border-right: 1px solid var(--v12-navbar-search-bg);
+    }
+    .search-item .search-btn {
+        width: 100%;
+        border-radius: 5px; /* Full radius on mobile */
+    }
+
+    .hero-section h2 {
+        font-size: 2em;
+    }
+    .hero-section p {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar-categories-intro {
+        grid-template-columns: 1fr;
+    }
+    .introduction-search-bar {
+        flex-direction: column;
+    }
+    .introduction-search-bar input[type="search"],
+    .introduction-search-bar button {
+        width: 100%;
+    }
+    .intro-event-card {
+        flex-direction: column;
+    }
+    .intro-event-card img {
+        width: 100%;
+        height: 180px;
+    }
+    .intro-card-content {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .club-name h1 {
+        font-size: 1.2em;
+    }
+    .club-name p {
+        font-size: 0.8em;
+    }
+    .partner-logos {
+        display: none;
+    }
+    .gallery img {
+        width: 100%;
+    }
+     .nav-links { /* V1.2: Mobile nav full width on very small screens */
+        inset: 0 0 0 0;
+    }
+}
